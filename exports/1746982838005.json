@@ -1,0 +1,15 @@
+{
+  "timestamp": 1746982838005,
+  "operation": {
+    "id": "backend:server:main"
+  },
+  "projectId": "project-management-software",
+  "files": [
+    {
+      "path": "../../apps/project-management-software/backend/server.js",
+      "type": "text",
+      "size": 22521,
+      "dependencies": false
+    }
+  ]
+}

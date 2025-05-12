@@ -1,0 +1,15 @@
+{
+  "timestamp": 1746983683922,
+  "operation": {
+    "id": "settings:config:package"
+  },
+  "projectId": "project-management-software",
+  "files": [
+    {
+      "path": "../../apps/project-management-software/vitereact/package.json",
+      "type": "text",
+      "size": 2916,
+      "dependencies": true
+    }
+  ]
+}

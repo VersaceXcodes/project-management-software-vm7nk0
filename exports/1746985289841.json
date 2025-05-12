@@ -1,0 +1,19 @@
+{
+  "timestamp": 1746985289841,
+  "operation": {
+    "id": "webapp:react:views",
+    "refs": {
+      "id": "GV_NotificationDropdown",
+      "version": "latest"
+    }
+  },
+  "projectId": "project-management-software",
+  "files": [
+    {
+      "path": "../../apps/project-management-software/vitereact/src/components/views/GV_NotificationDropdown.tsx",
+      "type": "text",
+      "size": 5996,
+      "dependencies": false
+    }
+  ]
+}

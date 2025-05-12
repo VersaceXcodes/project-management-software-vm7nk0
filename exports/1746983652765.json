@@ -1,0 +1,19 @@
+{
+  "timestamp": 1746983652765,
+  "operation": {
+    "id": "webapp:react:views",
+    "refs": {
+      "id": "UV_CreateTaskModal",
+      "version": "1746983326002"
+    }
+  },
+  "projectId": "project-management-software",
+  "files": [
+    {
+      "path": "../../apps/project-management-software/vitereact/src/components/views/UV_CreateTaskModal.tsx",
+      "type": "text",
+      "size": 10063,
+      "dependencies": false
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "timestamp": 1746984916745,
+  "operation": {
+    "id": "webapp:react:views",
+    "refs": {
+      "id": "UV_InvitationModal",
+      "version": "latest"
+    }
+  },
+  "projectId": "project-management-software",
+  "files": [
+    {
+      "path": "../../apps/project-management-software/vitereact/src/components/views/UV_InvitationModal.tsx",
+      "type": "text",
+      "size": 5581,
+      "dependencies": false
+    }
+  ]
+}

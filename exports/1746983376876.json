@@ -1,0 +1,19 @@
+{
+  "timestamp": 1746983376876,
+  "operation": {
+    "id": "webapp:react:root",
+    "refs": {
+      "id": "app",
+      "version": "latest"
+    }
+  },
+  "projectId": "project-management-software",
+  "files": [
+    {
+      "path": "../../apps/project-management-software/vitereact/src/App.tsx",
+      "type": "text",
+      "size": 3765,
+      "dependencies": false
+    }
+  ]
+}

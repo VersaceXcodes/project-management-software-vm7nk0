@@ -1,0 +1,19 @@
+{
+  "timestamp": 1746983713898,
+  "operation": {
+    "id": "webapp:react:views",
+    "refs": {
+      "id": "UV_Onboarding",
+      "version": "latest"
+    }
+  },
+  "projectId": "project-management-software",
+  "files": [
+    {
+      "path": "../../apps/project-management-software/vitereact/src/components/views/UV_Onboarding.tsx",
+      "type": "text",
+      "size": 3796,
+      "dependencies": false
+    }
+  ]
+}

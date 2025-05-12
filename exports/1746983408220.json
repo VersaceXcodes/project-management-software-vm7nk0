@@ -1,0 +1,19 @@
+{
+  "timestamp": 1746983408220,
+  "operation": {
+    "id": "webapp:react:views",
+    "refs": {
+      "id": "UV_Registration",
+      "version": "1746983325924"
+    }
+  },
+  "projectId": "project-management-software",
+  "files": [
+    {
+      "path": "../../apps/project-management-software/vitereact/src/components/views/UV_Registration.tsx",
+      "type": "text",
+      "size": 7541,
+      "dependencies": false
+    }
+  ]
+}

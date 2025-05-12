@@ -1,0 +1,19 @@
+{
+  "timestamp": 1746983433627,
+  "operation": {
+    "id": "webapp:react:views",
+    "refs": {
+      "id": "UV_Dashboard",
+      "version": "1746983325933"
+    }
+  },
+  "projectId": "project-management-software",
+  "files": [
+    {
+      "path": "../../apps/project-management-software/vitereact/src/components/views/UV_Dashboard.tsx",
+      "type": "text",
+      "size": 4783,
+      "dependencies": false
+    }
+  ]
+}

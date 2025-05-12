@@ -1,0 +1,21 @@
+{
+  "timestamp": 1746982848139,
+  "operation": {
+    "id": "settings:config:package"
+  },
+  "projectId": "project-management-software",
+  "files": [
+    {
+      "path": "../../apps/project-management-software/backend/package.json",
+      "type": "text",
+      "size": 804,
+      "dependencies": true
+    },
+    {
+      "path": "../../apps/project-management-software/backend/.env",
+      "type": "text",
+      "size": 453,
+      "dependencies": false
+    }
+  ]
+}

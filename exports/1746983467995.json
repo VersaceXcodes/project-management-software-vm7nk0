@@ -1,0 +1,19 @@
+{
+  "timestamp": 1746983467995,
+  "operation": {
+    "id": "webapp:react:views",
+    "refs": {
+      "id": "UV_ProjectDetail",
+      "version": "1746983325945"
+    }
+  },
+  "projectId": "project-management-software",
+  "files": [
+    {
+      "path": "../../apps/project-management-software/vitereact/src/components/views/UV_ProjectDetail.tsx",
+      "type": "text",
+      "size": 8656,
+      "dependencies": false
+    }
+  ]
+}

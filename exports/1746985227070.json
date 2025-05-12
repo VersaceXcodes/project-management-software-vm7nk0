@@ -1,0 +1,19 @@
+{
+  "timestamp": 1746985227070,
+  "operation": {
+    "id": "webapp:react:views",
+    "refs": {
+      "id": "GV_Breadcrumbs",
+      "version": "latest"
+    }
+  },
+  "projectId": "project-management-software",
+  "files": [
+    {
+      "path": "../../apps/project-management-software/vitereact/src/components/views/GV_Breadcrumbs.tsx",
+      "type": "text",
+      "size": 2783,
+      "dependencies": false
+    }
+  ]
+}

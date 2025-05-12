@@ -1,0 +1,19 @@
+{
+  "timestamp": 1746983208482,
+  "operation": {
+    "id": "webapp:react:store",
+    "refs": {
+      "id": "redux",
+      "version": "1746983165653"
+    }
+  },
+  "projectId": "project-management-software",
+  "files": [
+    {
+      "path": "../../apps/project-management-software/vitereact/src/store/main.tsx",
+      "type": "text",
+      "size": 5831,
+      "dependencies": false
+    }
+  ]
+}

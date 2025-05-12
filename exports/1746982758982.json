@@ -1,0 +1,15 @@
+{
+  "timestamp": 1746982758982,
+  "operation": {
+    "id": "backend:specifications:openapi"
+  },
+  "projectId": "project-management-software",
+  "files": [
+    {
+      "path": "../../apps/project-management-software/backend/openapi.yaml",
+      "type": "text",
+      "size": 17656,
+      "dependencies": false
+    }
+  ]
+}

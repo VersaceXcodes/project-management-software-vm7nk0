@@ -1,0 +1,740 @@
+openapi: 3.0.0
+info:
+  title: ProjectPro API
+  version: 1.0.0
+  description: >
+    Comprehensive REST API for ProjectPro MVP including user management, project
+    and task management, collaboration, file attachments, notifications, and
+    real-time updates.
+servers:
+  - url: http://localhost:3000
+paths:
+  /api/auth/register:
+    post:
+      summary: User Registration
+      operationId: register_user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RegisterRequest"
+      responses:
+        "200":
+          description: Registration successful; returns auth token and user profile.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthResponse"
+  /api/auth/login:
+    post:
+      summary: User Login
+      operationId: login_user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LoginRequest"
+      responses:
+        "200":
+          description: Login successful; returns auth token and user profile.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthResponse"
+  /api/users/{user_id}:
+    get:
+      summary: Get User Profile
+      operationId: get_user_profile
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          schema:
+            type: string
+      security:
+        - BearerAuth: []
+      responses:
+        "200":
+          description: User profile retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+    put:
+      summary: Update User Profile
+      operationId: update_user_profile
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          schema:
+            type: string
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateUserRequest"
+      responses:
+        "200":
+          description: User profile updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+  /api/invitations:
+    post:
+      summary: Send Invitation to Join Project
+      operationId: send_invitation
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/InvitationRequest"
+      responses:
+        "200":
+          description: Invitation sent successfully.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InvitationResponse"
+  /api/projects:
+    post:
+      summary: Create Project
+      operationId: create_project
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProjectCreateRequest"
+      responses:
+        "200":
+          description: Project created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Project"
+    get:
+      summary: List Projects
+      operationId: list_projects
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: archived
+          in: query
+          required: false
+          description: Filter by archived status (0 = active, 1 = archived)
+          schema:
+            type: integer
+            enum:
+              - 0
+              - 1
+      responses:
+        "200":
+          description: Projects retrieved successfully.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Project"
+  /api/projects/{project_id}:
+    put:
+      summary: Update Project
+      operationId: update_project
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: project_id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProjectUpdateRequest"
+      responses:
+        "200":
+          description: Project updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Project"
+    delete:
+      summary: Archive Project
+      operationId: archive_project
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: project_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Project archived successfully.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ArchiveResponse"
+  /api/projects/{project_id}/tasks:
+    post:
+      summary: Create Task
+      operationId: create_task
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: project_id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TaskCreateRequest"
+      responses:
+        "200":
+          description: Task created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Task"
+    get:
+      summary: List Tasks for a Project
+      operationId: list_tasks
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: project_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Tasks retrieved successfully.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Task"
+  /api/tasks/{task_id}:
+    put:
+      summary: Update Task
+      operationId: update_task
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: task_id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TaskUpdateRequest"
+      responses:
+        "200":
+          description: Task updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Task"
+    delete:
+      summary: Delete Task
+      operationId: delete_task
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: task_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Task deleted successfully.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeleteResponse"
+  /api/tasks/{task_id}/comments:
+    post:
+      summary: Add Task Comment
+      operationId: add_comment
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: task_id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CommentCreateRequest"
+      responses:
+        "200":
+          description: Comment added successfully.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Comment"
+  /api/tasks/{task_id}/attachments:
+    post:
+      summary: Upload Task Attachment
+      operationId: upload_attachment
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: task_id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: "#/components/schemas/AttachmentCreateRequest"
+      responses:
+        "200":
+          description: Attachment uploaded successfully.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Attachment"
+  /api/notifications:
+    get:
+      summary: List Notifications
+      operationId: list_notifications
+      security:
+        - BearerAuth: []
+      responses:
+        "200":
+          description: Notifications retrieved successfully.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Notification"
+  /api/notifications/{notification_id}:
+    put:
+      summary: Mark Notification as Read
+      operationId: mark_notification_read
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: notification_id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                read_status:
+                  type: number
+                  default: 1
+      responses:
+        "200":
+          description: Notification marked as read successfully.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Notification"
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    RegisterRequest:
+      type: object
+      required:
+        - first_name
+        - last_name
+        - email
+        - password
+        - role
+      properties:
+        first_name:
+          type: string
+        last_name:
+          type: string
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+          format: password
+        role:
+          type: string
+          enum:
+            - project_manager
+            - team_member
+            - guest
+        profile_picture_url:
+          type: string
+          nullable: true
+    LoginRequest:
+      type: object
+      required:
+        - email
+        - password
+      properties:
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+          format: password
+    AuthResponse:
+      type: object
+      properties:
+        token:
+          type: string
+        user:
+          $ref: "#/components/schemas/User"
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+        first_name:
+          type: string
+        last_name:
+          type: string
+        email:
+          type: string
+          format: email
+        profile_picture_url:
+          type: string
+          nullable: true
+        role:
+          type: string
+        notification_settings:
+          type: object
+          additionalProperties: true
+          nullable: true
+        created_at:
+          type: string
+        updated_at:
+          type: string
+    UpdateUserRequest:
+      type: object
+      properties:
+        first_name:
+          type: string
+        last_name:
+          type: string
+        profile_picture_url:
+          type: string
+          nullable: true
+        notification_settings:
+          type: object
+          additionalProperties: true
+    InvitationRequest:
+      type: object
+      required:
+        - invitee_email
+        - role
+      properties:
+        invitee_email:
+          type: string
+          format: email
+        role:
+          type: string
+          enum:
+            - project_manager
+            - team_member
+            - guest
+    InvitationResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        inviter_id:
+          type: string
+        invitee_email:
+          type: string
+          format: email
+        role:
+          type: string
+        status:
+          type: string
+        created_at:
+          type: string
+    Milestone:
+      type: object
+      required:
+        - title
+        - due_date
+      properties:
+        title:
+          type: string
+        due_date:
+          type: string
+        description:
+          type: string
+          nullable: true
+    ProjectCreateRequest:
+      type: object
+      required:
+        - title
+        - start_date
+        - end_date
+      properties:
+        title:
+          type: string
+        description:
+          type: string
+          nullable: true
+        start_date:
+          type: string
+        end_date:
+          type: string
+        milestones:
+          type: array
+          items:
+            $ref: "#/components/schemas/Milestone"
+    ProjectUpdateRequest:
+      type: object
+      properties:
+        title:
+          type: string
+        description:
+          type: string
+          nullable: true
+        start_date:
+          type: string
+        end_date:
+          type: string
+        milestones:
+          type: array
+          items:
+            $ref: "#/components/schemas/Milestone"
+    Project:
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+          nullable: true
+        start_date:
+          type: string
+        end_date:
+          type: string
+        archived:
+          type: number
+        created_by:
+          type: string
+        created_at:
+          type: string
+        updated_at:
+          type: string
+        milestones:
+          type: array
+          items:
+            $ref: "#/components/schemas/Milestone"
+    ArchiveResponse:
+      type: object
+      properties:
+        message:
+          type: string
+    TaskCreateRequest:
+      type: object
+      required:
+        - name
+        - due_date
+        - priority
+        - status
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+          nullable: true
+        parent_task_id:
+          type: string
+          nullable: true
+        assignee_id:
+          type: string
+          nullable: true
+        due_date:
+          type: string
+        priority:
+          type: string
+          enum:
+            - Low
+            - Medium
+            - High
+        status:
+          type: string
+          enum:
+            - not_started
+            - in_progress
+            - blocked
+            - completed
+    TaskUpdateRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+          nullable: true
+        parent_task_id:
+          type: string
+          nullable: true
+        assignee_id:
+          type: string
+          nullable: true
+        due_date:
+          type: string
+        priority:
+          type: string
+          enum:
+            - Low
+            - Medium
+            - High
+        status:
+          type: string
+          enum:
+            - not_started
+            - in_progress
+            - blocked
+            - completed
+    Task:
+      type: object
+      properties:
+        id:
+          type: string
+        project_id:
+          type: string
+        parent_task_id:
+          type: string
+          nullable: true
+        name:
+          type: string
+        description:
+          type: string
+          nullable: true
+        assignee_id:
+          type: string
+          nullable: true
+        due_date:
+          type: string
+        priority:
+          type: string
+        status:
+          type: string
+        created_at:
+          type: string
+        updated_at:
+          type: string
+    DeleteResponse:
+      type: object
+      properties:
+        message:
+          type: string
+    CommentCreateRequest:
+      type: object
+      required:
+        - comment_text
+      properties:
+        comment_text:
+          type: string
+    Comment:
+      type: object
+      properties:
+        id:
+          type: string
+        task_id:
+          type: string
+        user_id:
+          type: string
+        comment_text:
+          type: string
+        created_at:
+          type: string
+    AttachmentCreateRequest:
+      type: object
+      required:
+        - file
+      properties:
+        file:
+          type: string
+          format: binary
+    Attachment:
+      type: object
+      properties:
+        id:
+          type: string
+        task_id:
+          type: string
+        user_id:
+          type: string
+        file_name:
+          type: string
+        file_url:
+          type: string
+        file_type:
+          type: string
+        uploaded_at:
+          type: string
+    Notification:
+      type: object
+      properties:
+        id:
+          type: string
+        user_id:
+          type: string
+        type:
+          type: string
+        message:
+          type: string
+        related_project_id:
+          type: string
+          nullable: true
+        related_task_id:
+          type: string
+          nullable: true
+        read_status:
+          type: number
+        created_at:
+          type: string

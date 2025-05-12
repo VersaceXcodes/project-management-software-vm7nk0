@@ -1,0 +1,15 @@
+{
+  "timestamp": 1746982721923,
+  "operation": {
+    "id": "backend:specifications:asyncapi"
+  },
+  "projectId": "project-management-software",
+  "files": [
+    {
+      "path": "../../apps/project-management-software/backend/asyncapi.yaml",
+      "type": "text",
+      "size": 5226,
+      "dependencies": false
+    }
+  ]
+}

@@ -1,0 +1,160 @@
+asyncapi: 2.0.0
+info:
+  title: ProjectPro Realtime Events API
+  version: 1.0.0
+  description: >
+    This AsyncAPI document describes the realtime events used in the ProjectPro
+    MVP. It includes channels for notification events, task update events, and
+    comment events, ensuring live updates for task management, notifications,
+    and collaborative communications.
+servers:
+  development:
+    url: localhost:3000
+    protocol: ws
+    description: Development WebSocket server for realtime events.
+channels:
+  notification_event:
+    description: Channel for broadcasting realtime notification events.
+    subscribe:
+      summary: Subscribe to realtime notification events.
+      operationId: subscribe_notification_event
+      message:
+        $ref: "#/components/messages/notificationMessage"
+  task_update_event:
+    description: Channel for broadcasting realtime task update events.
+    subscribe:
+      summary: Subscribe to realtime task update events.
+      operationId: subscribe_task_update_event
+      message:
+        $ref: "#/components/messages/taskUpdateMessage"
+  comment_event:
+    description: Channel for broadcasting realtime comment events.
+    subscribe:
+      summary: Subscribe to realtime comment events.
+      operationId: subscribe_comment_event
+      message:
+        $ref: "#/components/messages/commentMessage"
+components:
+  messages:
+    notificationMessage:
+      name: NotificationMessage
+      title: Notification Event Message
+      summary: Message payload for realtime notification events.
+      contentType: application/json
+      payload:
+        type: object
+        required:
+          - id
+          - user_id
+          - type
+          - message
+          - read_status
+          - created_at
+        properties:
+          id:
+            type: string
+            description: Unique identifier for the notification.
+          user_id:
+            type: string
+            description: Identifier of the user receiving the notification.
+          type:
+            type: string
+            description: Type of notification (e.g., task_assignment, status_update,
+              deadline_alert).
+          message:
+            type: string
+            description: Notification message content.
+          related_project_id:
+            type: string
+            description: Optional project identifier related to the notification.
+          related_task_id:
+            type: string
+            description: Optional task identifier related to the notification.
+          read_status:
+            type: integer
+            enum:
+              - 0
+              - 1
+            description: Read status flag (0 = unread, 1 = read).
+          created_at:
+            type: string
+            description: ISO8601 timestamp for when the notification was created.
+    taskUpdateMessage:
+      name: TaskUpdateMessage
+      title: Task Update Event Message
+      summary: Message payload for realtime task update events.
+      contentType: application/json
+      payload:
+        type: object
+        required:
+          - id
+          - project_id
+          - name
+          - status
+          - updated_at
+        properties:
+          id:
+            type: string
+            description: Unique identifier for the task.
+          project_id:
+            type: string
+            description: Identifier of the project associated with the task.
+          name:
+            type: string
+            description: Name of the task.
+          description:
+            type: string
+            description: Task description.
+          assignee_id:
+            type: string
+            description: Identifier of the user assigned to the task.
+          due_date:
+            type: string
+            description: Task due date in ISO8601 format.
+          priority:
+            type: string
+            enum:
+              - Low
+              - Medium
+              - High
+            description: Priority level of the task.
+          status:
+            type: string
+            enum:
+              - not_started
+              - in_progress
+              - blocked
+              - completed
+            description: Current status of the task.
+          updated_at:
+            type: string
+            description: ISO8601 timestamp of the last update to the task.
+    commentMessage:
+      name: CommentMessage
+      title: Comment Event Message
+      summary: Message payload for realtime comment events.
+      contentType: application/json
+      payload:
+        type: object
+        required:
+          - id
+          - task_id
+          - user_id
+          - comment_text
+          - created_at
+        properties:
+          id:
+            type: string
+            description: Unique identifier for the comment.
+          task_id:
+            type: string
+            description: Identifier of the task associated with the comment.
+          user_id:
+            type: string
+            description: Identifier of the user who posted the comment.
+          comment_text:
+            type: string
+            description: Text content of the comment.
+          created_at:
+            type: string
+            description: ISO8601 timestamp for when the comment was created.

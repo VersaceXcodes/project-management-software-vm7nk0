@@ -1,0 +1,19 @@
+{
+  "timestamp": 1746985069557,
+  "operation": {
+    "id": "webapp:react:views",
+    "refs": {
+      "id": "UV_EditTaskModal",
+      "version": "latest"
+    }
+  },
+  "projectId": "project-management-software",
+  "files": [
+    {
+      "path": "../../apps/project-management-software/vitereact/src/components/views/UV_EditTaskModal.tsx",
+      "type": "text",
+      "size": 11386,
+      "dependencies": false
+    }
+  ]
+}

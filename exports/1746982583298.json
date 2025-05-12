@@ -1,0 +1,15 @@
+{
+  "timestamp": 1746982583298,
+  "operation": {
+    "id": "db:postgres"
+  },
+  "projectId": "project-management-software",
+  "files": [
+    {
+      "path": "../../apps/project-management-software/backend/db.sql",
+      "type": "text",
+      "size": 8055,
+      "dependencies": false
+    }
+  ]
+}
